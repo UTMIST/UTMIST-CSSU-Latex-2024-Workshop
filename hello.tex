@@ -1,0 +1,266 @@
+%this is to latex what type of document you are typing up
+\documentclass{article}
+% include all your necessary packages here before document
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+
+% these packages are 
+% the algorithm package is mainly for acting as a container for the algorithm
+% you can write your captions 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+%these 2 lines are essential for including a list of citations for your article or paper
+% it tells latex to use the biblatex package and you can tell it what style you would like the citations to be formatted in
+% the addbibresource tells latex where to look for the citations you provided
+\usepackage[backend=bibtex,style=ieee]{biblatex}
+\addbibresource{refs.bib}
+
+\title{UTMIST $\times$ CSSU Latex Workshop}
+\author{Ambrose Ling}
+
+% everything inside your document wrapped inside 
+\begin{document}
+%it looks for \title, \author and \date
+\maketitle
+
+% \newline is pretty self explanatory
+% \indent pushes your text in, adding an indent to the start of your paragrapha
+\section{Introduction}
+%typing some text and inline math, inline math tries to fit the equation in one line
+\indent Hello this is the UTMIST x CSSU latex workshop. Welcome today I will show you guys how to use all the most common latex commands. insert inline math. \newline \indent Technically you can use the dollar sign, but the properly supported way is using \(E = mc^2\).
+
+%if you want to create an equation on the page that spans, you can use the equation environment, this by default 
+\begin{equation}
+\label{eq:Einstein}
+E = mc^2
+\end{equation}
+% this by default puts a numerical label at the end of the equation
+I just wrote an equation above and if I want to reference the equation by label we can just do  \ref{eq:Einstein}. But there are also times you may want to write a series of mathematical expressions, to maybe show the derivation of some variable or some expression. The align envrionment becomes pretty handy.
+
+%what if you want to create a series of mathematical expressions, maybe you are deriving an expression?
+\begin{align}
+E &= mc^2 \notag &&
+\\ &= mc^2 + mc - mc &&
+\end{align}
+% by default, the align environment mimics the equation environment and puts a tag after at the end of every line you can get rid of it by adding the \notag
+% the & percent also helps align your equations 
+% the & symbol acts as a column indicator symbol so it tells latex youre trying to seperate 
+
+% another way of disabling numbering is putting using the align* environment
+\begin{align}
+E &= mc^2 \notag &&
+\\ &= mc^2 + mc - mc &&
+\end{align}
+% in case you want 2 equations in one line, you can add another & to seperate
+\begin{align}
+E &= mc^2 & P V = n R T
+\end{align}
+% you can see that the & can act as a column seperator or a symbol of seperating clauses horizontally
+
+%you can also align the equation to the left by using the flalign environment
+% if you want to indicate inequality you can use \le (less than or equal to), \ge (greater than or equal to)
+\begin{flalign}
+E &= mc^2 \notag &&
+\\ &= mc^2 + mc - mc &&
+\end{flalign}
+
+%you can also input fractions, summations
+% to put a subscript you do symbol_{subsript}
+% to put a superscript or an exponent you do symbol^{superscript or exponent}
+% to type infinty you can use \infty
+% to write a fraction you can do \frac{numerator}{denominator}
+% if you want to use 
+
+Here is a general fact about the natural number e:
+\begin{align}
+e &= \lim_{n \rightarrow \infty} (1 + \frac{1}{n})^n
+\\ &= \sum_{n=0}^{\infty} (\frac{1}{n!})
+\end{align}
+
+%If you ever need to create a matrix
+\begin{equation}
+\begin{pmatrix}
+10 & 20 \\
+20 & 20
+\end{pmatrix}
+= 10 
+% \hspace{30pt} %you can add some horizontal space in between the matrices if you want
+\begin{bmatrix}
+x_{0,0} & \cdots & x_{0,n} \\
+\vdots & \ddots & \vdots \\
+x_{m,0} & \cdots & x_{m,n}
+\end{bmatrix}
+= 10
+\end{equation}
+
+\section{Images}
+
+% The figure environment is used to include figures in a document. 
+% It allows you to add captions, labels for referencing, and optional positioning.
+
+\begin{figure}[h] % [h] is the positioning option: 'h' stands for "here"
+    % The center environment centers the content within the figure
+    \begin{center} 
+        % \includegraphics is the command to include an image. 
+        % 'scale=0.14' scales the image to 14% of its original size.
+        \includegraphics[scale=0.14]{diagram-latex.jpeg}
+    \end{center}
+    % \caption adds a caption below the figure. This is optional but useful for descriptions.
+    \caption{Caption for stonks}
+    % Optionally, you can add a \label here to reference this figure elsewhere in the document.
+    % Example: \label{fig:stonks}
+\end{figure}
+
+
+
+What if we want to have 2 images side by side?
+% The figure environment is used to include figures and allows for captions, 
+% labels for referencing, and positioning control.
+
+\begin{figure}[h!] % [h!] forces the figure to appear "here" in the text, overriding LaTeX's default positioning rules.
+
+    % The minipage environment allows creating independent "mini" pages or blocks
+    % inside the figure. This is useful for placing elements side by side.
+    \begin{minipage}[t]{0.48\textwidth} % Create a minipage that is 48% of the text width
+        % [t] aligns the content of the minipage to the top.
+        \centering % Centers the content within this minipage
+        % Include the image with width set to fill the minipage
+        \includegraphics[width=\textwidth]{diagram-latex.jpeg} 
+        % Add a caption for this image. Captions appear below the image.
+        \caption{Caption for Image 1}
+    \end{minipage}
+    % \hfill adds horizontal spacing between the two minipages. This adjusts the separation.
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth} % Create another minipage, also 48% of the text width
+        \centering % Centers the content within this minipage
+        \includegraphics[width=\textwidth]{diagram-latex.jpeg} % Include another image
+        \caption{Caption for Image 2} % Add a caption for the second image
+    \end{minipage}
+
+    % Note: LaTeX will position these two minipages side by side because their combined
+    % width is less than 1.0 (100%) of the text width, plus some spacing from \hfill.
+\end{figure}
+
+%Sometimes you may want to wrap text around your image, you can use a wrapfigure environment to do so
+
+% 'r' places the image on the right; 'l' would place it on the left.
+% '0.4\textwidth' specifies the width of the wrapped figure (image + text space).
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \centering % Center the image within the figure box
+    % Include the image. Adjust the width to fit nicely within the allocated space.
+    \includegraphics[width=0.38\textwidth]{diagram-latex.jpeg} 
+    % Add a caption below the image
+    \caption{An example image.}
+    % Add a label for referencing the figure in the text
+    \label{fig:example}
+\end{wrapfigure}
+
+% Start the text. The text will flow around the image.
+This is an example of wrapping text around an image. The text will flow around the image, making the layout more visually appealing and space-efficient. You can use this approach in articles or reports where images and descriptions are closely related.
+
+% Add more text to demonstrate the effect of wrapping.
+More text to demonstrate wrapping around the image. You can adjust the width of the wrapped figure and the image to suit your needs.
+
+
+\section{Tables}
+We can create tables using the tabular environment. You can specify the number of columns your table has. And there are ways to further modify your table to incorporate your own style.
+
+% in here the {} brackets are mandatory for a tabular environment to specify the style of the table, for instance how many columns are there, and how are the columns seperated
+
+This is a table with 2 columns, a Name column and an Age column with 2 rows.
+We wrapped the table inside a center environment to center it in the middle of the page.
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Name} & \textbf{Age} \\ \hline
+Ambrose & 10 \(\uparrow\)\\ \hline
+Mathew & 20 \\ \hline
+\end{tabular}
+\end{center}
+
+You can also create tables with merged columns if you really wanted to. \\
+% you first specify how many columns fundamentally you would need
+\begin{tabular}{|c|c|c|c|}
+\hline
+A & B & \multicolumn{2}{|c|}{Merged Column} \\ \hline
+1 & 2 & \multicolumn{2}{|c|}{4} \\ \hline
+10 & 23 & \multicolumn{2}{|c|}{5 \quad 6} \\ \hline
+\end{tabular}
+
+Even tables with merged rows for example if you want 1 row to indicate a cateogry and theres multiple rows that belong to this category
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Category} & \textbf{Subcategory} & \textbf{Details} \\ \hline
+\multirow{3}{*}{Fruits} & Apple & Red \\ \cline{2-3}
+                        & Banana & Yellow \\ \cline{2-3}
+                        & Orange & Orange \\ \hline
+\multirow{2}{*}{Vegetables} & Carrot & Orange \\ \cline{2-3}
+                            & Spinach & Green \\ \hline
+\end{tabular}
+\caption{Table with merged rows}
+\label{tab:merged-rows}
+\end{table}
+
+
+\section{Algorithms}
+Latex also lets you write algorihms so if you are writing a report or a paper that needs to show how an algorithm works. Latex can you help you do that.
+
+% initialize the algorithm envrionment
+% the algorithm envrionment is a floating envrionment, lets you move the 
+% the algorithm to anywhere you want in the 
+\begin{algorithm}
+% give your lovely algorithm a name
+\caption{Example Algorithm}
+% this marks the beginning of your algorithm
+\begin{algorithmic}[1]
+\Require An array $A$ of size $n$ \Comment{Input}
+\State \textbf{Initialize} An array $A$ of size $n$ \Comment{Input}
+\State The maximum value in $A$ \Comment{Output}
+\State $max \gets A[1]$
+\For{$i \gets 2$ to $n$}
+    \If{$A[i] > max$}
+        \State $max \gets A[i]$ \Comment{Update max}
+    \EndIf
+\EndFor
+\State \Return $max$
+\end{algorithmic}
+\end{algorithm}
+As you can see i wrote an amazing algorithm in latex. Very nice.
+\clearpage
+
+%lets practice cuz im not that good ngl
+\begin{algorithm}[t]
+\caption{Dijkstra's algorithm}
+\begin{algorithmic}[1]
+\State A set of nodes $V$ and set of edges $E$ in the graph
+\State A priority queue $Q$ \Comment{Input}
+\State A predecessors $P$  for reconstructing
+\For{$v \in V$}
+    \State $v.distance = \infty$
+\EndFor
+\While{$Q$ is not empty}
+    $currentDistance, v \gets Q.pop(0)$
+    \For{$v_n \in v.neighbours$}
+        \State $distance = currentDistance + v_n.weight$
+        \If{$distance > v.distance$}
+            \State $v.distance = distance$
+            \State $predecessors[v_n] = v$
+            \State $Q.push(v_n)$
+        \EndIf
+    \EndFor
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+I wrote another algorithm called Dijkstra's algorithm
+
+\section{Ctiations}
+\medskip
+\printbibliography
+
+\end{document}
